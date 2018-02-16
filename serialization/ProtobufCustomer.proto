@@ -1,0 +1,8 @@
+syntax = "proto2";
+package serialization;
+
+message ProtobufCustomer {
+    required string name     = 1;
+    required string address  = 2;
+    optional string vat      = 3;
+}
