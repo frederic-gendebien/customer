@@ -1,54 +1,24 @@
 package commands
 
 import (
-	"fmt"
 	"github.com/frederic-gendebien/customer/persistence"
 )
 
-type DeleteCustomer struct{}
-
-type CustomerDeletion struct {
+type DeleteCustomer struct {
 	alias string
 }
 
-func NewDeleteCustomer() *DeleteCustomer {
-	return new(DeleteCustomer)
+type DeleteCustomerBuilder struct {
+	Alias string
 }
 
-func (command *DeleteCustomer) Name() string {
-	return "delete"
+func NewDeleteCustomer(builder DeleteCustomerBuilder) *DeleteCustomer {
+	command := new(DeleteCustomer)
+	command.alias = builder.Alias
+
+	return command
 }
 
-func (command *DeleteCustomer) Description() string {
-	return "delete a user from his alias"
-}
-
-func (command *DeleteCustomer) Execute(arguments []string) error {
-	customerDeletion, err := command.parse(arguments)
-	if err != nil {
-		return err
-	}
-
-	return customerDeletion.execute()
-}
-
-func (command *DeleteCustomer) parse(arguments []string) (*CustomerDeletion, error) {
-	if len(arguments) != 1 {
-		return nil, fmt.Errorf("wrong number of parameters")
-	}
-
-	alias := arguments[0]
-	if alias == "" {
-		return nil, fmt.Errorf("could not work with empty alias")
-	}
-
-	customerDeletion := CustomerDeletion{
-		alias: alias,
-	}
-
-	return &customerDeletion, nil
-}
-
-func (customerDeletion *CustomerDeletion) execute() error {
-	return persistence.Delete(customerDeletion.alias)
+func (command *DeleteCustomer) Execute() error {
+	return persistence.Delete(command.alias)
 }

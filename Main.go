@@ -1,12 +1,21 @@
 package main
 
 import (
-	"github.com/frederic-gendebien/customer/commands"
 	"log"
+
+	"github.com/frederic-gendebien/customer/protocol"
 )
 
+func init() {
+}
+
 func main() {
-	err := commands.Handle()
+	command, err := protocol.Parse()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = command.Execute()
 	if err != nil {
 		log.Fatal(err)
 	}

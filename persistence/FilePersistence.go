@@ -11,9 +11,11 @@ import (
 
 const GOPATH = "GOPATH"
 
-var gopath = ""
-var folder = ""
-var serializer = serialization.Protobuf.Serializer()
+var (
+	gopath = ""
+	folder = ""
+	serializer = serialization.Protobuf.Serializer()
+)
 
 func init() {
 	verifyEnvironment()

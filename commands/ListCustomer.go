@@ -5,21 +5,13 @@ import (
 	"github.com/frederic-gendebien/customer/persistence"
 )
 
-type ListCustomer struct{}
+type ListCustomer struct {}
 
 func NewListCustomer() *ListCustomer {
 	return new(ListCustomer)
 }
 
-func (command *ListCustomer) Name() string {
-	return "list"
-}
-
-func (command *ListCustomer) Description() string {
-	return "list all customers aliases"
-}
-
-func (command *ListCustomer) Execute(arguments []string) error {
+func (command *ListCustomer) Execute() error {
 	aliases, err := persistence.List()
 	if err != nil {
 		return err

@@ -23,9 +23,9 @@ func NewCustomer(builder CustomerBuilder) (*Customer, error) {
 	}
 
 	customer := new(Customer)
-	customer.name = builder.Name
-	customer.address = builder.Address
-	customer.vat = builder.Vat
+	customer.name 		= builder.Name
+	customer.address 	= builder.Address
+	customer.vat 		= builder.Vat
 
 	return customer, nil
 }
